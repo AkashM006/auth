@@ -4,8 +4,6 @@ import { Formik, FormikHelpers } from "formik";
 import FormField from "../Components/Form/FormField";
 import useSignup from "../Hooks/useSignup";
 import signupSchema from "../Validation/Signup";
-import { toast } from "react-toastify";
-import { ValidationError } from "../Types/Response";
 import { mutationErrorHandler } from "../utils/ErrorHandler";
 
 function SignupView() {
