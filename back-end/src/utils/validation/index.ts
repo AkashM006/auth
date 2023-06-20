@@ -28,14 +28,7 @@ const userLoginSchema = yup.object({
     .email("Please enter valid email")
     .trim()
     .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be atleast 8 characters long")
-    .matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).*$/,
-      "Password must have at least one number, one special character, and one capital letter"
-    )
-    .required("Password is required"),
+  password: yup.string().required("Password is required"),
 });
 
 export { userRegistrationSchema, userLoginSchema };

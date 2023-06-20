@@ -45,7 +45,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 
   setCookie(res, refreshToken, "jwt");
 
-  successHandler(res, { accessToken });
+  successHandler(res, { accessToken, name, email });
 };
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -68,7 +68,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
   setCookie(res, refreshToken, "jwt");
 
-  successHandler(res, { accessToken });
+  successHandler(res, { accessToken, email, name: user.name });
 };
 
 const refresh = (req: Request, res: Response, next: NextFunction) => {

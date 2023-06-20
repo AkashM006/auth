@@ -1,6 +1,6 @@
 import { CorsOptions } from "cors";
 
-const allowedOrigins = ["http://localhost:5714"]; // The request from these domains are alone accepted by the server
+const allowedOrigins = ["http://localhost:5173"]; // The request from these domains are alone accepted by the server
 
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
