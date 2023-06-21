@@ -1,4 +1,8 @@
-import { UseMutationResult, useMutation } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { User } from "../Types/Data";
 import {
   ApiErrorResponse,
@@ -12,13 +16,16 @@ function useSignup(): UseMutationResult<
   ApiErrorResponse | ApiValidationErrorResponse,
   SignUpRequest
 > {
+  const queryClient = useQueryClient();
+
   return useMutation<
     User,
     ApiErrorResponse | ApiValidationErrorResponse,
     SignUpRequest
   >(signup, {
     onSuccess: (data) => {
-      // do something automatically
+      const tokenData = { accessToken: data.accessToken };
+      queryClient.setQueryData(["token"], tokenData);
       console.log("data: ", data);
     },
   });

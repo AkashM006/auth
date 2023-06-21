@@ -5,6 +5,7 @@ import loginSchema from "../Validation/Login";
 import FormField from "../Components/Form/FormField";
 import useLogin from "../Hooks/useLogin";
 import { mutationErrorHandler } from "../utils/ErrorHandler";
+import { useNavigate } from "react-router-dom";
 
 function LoginView() {
   const values: LoginRequest = {
@@ -18,6 +19,7 @@ function LoginView() {
   };
 
   const { mutate, isLoading } = useLogin();
+  const navigate = useNavigate();
 
   const submitHandler = (
     values: LoginRequest,
@@ -28,6 +30,7 @@ function LoginView() {
         formikHelpers.setSubmitting(false);
       },
       onError: (error) => mutationErrorHandler(error, formikHelpers),
+      onSuccess: () => navigate("/"),
     });
   };
 

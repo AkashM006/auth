@@ -5,7 +5,8 @@ const setCookie = (res: Response, data: any, name: string) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: 1000 * 60 * 20, // 20 minutes
+    maxAge: 1000 * 60 * 60, // 1 hour
+    domain: "localhost",
   });
 };
 

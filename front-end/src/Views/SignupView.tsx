@@ -5,6 +5,7 @@ import FormField from "../Components/Form/FormField";
 import useSignup from "../Hooks/useSignup";
 import signupSchema from "../Validation/Signup";
 import { mutationErrorHandler } from "../utils/ErrorHandler";
+import { useNavigate } from "react-router-dom";
 
 function SignupView() {
   const values: SignUpRequest = {
@@ -20,6 +21,7 @@ function SignupView() {
   };
 
   const { mutate, isLoading } = useSignup();
+  const navigate = useNavigate();
 
   const submitHandler = (
     values: SignUpRequest,
@@ -30,6 +32,7 @@ function SignupView() {
       onSettled: () => {
         formikHelpers.setSubmitting(false);
       },
+      onSuccess: () => navigate("/"),
     });
   };
 
