@@ -18,6 +18,7 @@ function useToken(): UseQueryResult<AccessToken, ApiErrorResponse> {
     refetchInterval: 15 * 60 * 1000,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    retry: false,
     onError: (_error) => {
       queryClient.setQueryData(["token"], null);
     },
