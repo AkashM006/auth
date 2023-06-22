@@ -2,11 +2,12 @@ import { NextFunction, Response } from "express";
 import { RequestErrorHandler } from "../Errors/ErrorHandler";
 import { UnAuthorizedError } from "../Errors/Errors";
 import { DecodedToken, verifyToken } from "../jwt";
-import { Request } from "../../types/http";
+import { Headers, Request } from "../../types/http";
 
 const verifyJwt = RequestErrorHandler(
   (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
+    const headers = req.headers as Headers;
+    const authHeader = headers.authorization || headers.Authorization;
 
     if (!authHeader?.startsWith("Bearer ")) throw new UnAuthorizedError();
 

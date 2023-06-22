@@ -57,11 +57,11 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     },
   });
 
-  if (!user) throw new UnAuthorizedError();
+  if (!user) throw new UnAuthorizedError("Username or password is wrong!");
 
-  const match = comparePassword(password, user.password);
+  const match = await comparePassword(password, user.password);
 
-  if (!match) throw new UnAuthorizedError();
+  if (!match) throw new UnAuthorizedError("Username or password is wrong");
 
   const accessToken = signAccessToken(user);
   const refreshToken = signRefreshToken(user);

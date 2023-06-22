@@ -5,9 +5,6 @@ type TokenUser = {
   name: string;
 };
 
-// type DecodedToken = {
-//   email: string;
-// };
 export interface DecodedToken extends jwt.JwtPayload {
   email: string;
 }
