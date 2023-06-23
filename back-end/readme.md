@@ -1,6 +1,6 @@
-# Boilerplate Express Project
+# Authentication backend
 
-This repository hosts the boilerplate code that I use mostly. In order to boost productivity it has been hosted online.
+This project was developed as part of getting to know react query by implementing authentication in react.
 
 # How to run the project
 
