@@ -28,6 +28,7 @@ const getDetail = (token: string | null | undefined) => {
 };
 
 const getNewAccessToken = () => {
+  console.log("Fetch new token");
   return axios.post<ApiResponse>(`/auth/refresh`).then((res) => res.data.msg);
 };
 

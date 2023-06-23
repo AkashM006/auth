@@ -5,7 +5,7 @@ import { DecodedToken, verifyToken } from "../jwt";
 import { Headers, Request } from "../../types/http";
 
 const verifyJwt = RequestErrorHandler(
-  (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const headers = req.headers as Headers;
     const authHeader = headers.authorization || headers.Authorization;
 
@@ -13,14 +13,20 @@ const verifyJwt = RequestErrorHandler(
 
     const token = authHeader.split(" ")[1];
 
-    verifyToken(token, "access", (error, decoded) => {
-      if (error) throw new UnAuthorizedError();
+    // verifyToken(token, "access", (error, decoded) => {
+    //   if (error) throw new UnAuthorizedError();
 
-      const userData = decoded as DecodedToken;
+    //   const userData = decoded as DecodedToken;
 
-      req.user = userData;
-      next();
-    });
+    //   req.user = userData;
+    //   next();
+    // });
+    const decoded = await verifyToken(token, "access");
+
+    const userData = decoded as DecodedToken;
+
+    req.user = userData;
+    next();
   }
 );
 

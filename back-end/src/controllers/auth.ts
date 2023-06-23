@@ -71,30 +71,30 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   successHandler(res, { accessToken, email, name: user.name });
 };
 
-const refresh = (req: Request, res: Response, next: NextFunction) => {
+const refresh = async (req: Request, res: Response, next: NextFunction) => {
   const cookies = req.cookies;
 
   if (!cookies?.jwt) throw new UnAuthorizedError();
 
   const refreshToken = cookies.jwt;
 
-  verifyToken(refreshToken, "refresh", async (error, decoded) => {
-    if (error) throw new UnAuthorizedError();
+  let decoded;
+  try {
+    decoded = verifyToken(refreshToken, "refresh");
+  } catch (error) {
+    throw new UnAuthorizedError();
+  }
 
-    let decodedToken = decoded as DecodedToken;
-
-    const user = await prisma.users.findFirst({
-      where: {
-        email: decodedToken.email,
-      },
-    });
-
-    if (!user) throw new UnAuthorizedError();
-
-    const accessToken = signAccessToken(user);
-
-    successHandler(res, { accessToken });
+  let decodedToken = decoded as DecodedToken;
+  const user = await prisma.users.findFirst({
+    where: {
+      email: decodedToken.email,
+    },
   });
+
+  if (!user) throw new UnAuthorizedError();
+  const accessToken = signAccessToken(user);
+  successHandler(res, { accessToken });
 };
 
 const logout = (req: Request, res: Response, next: NextFunction) => {

@@ -19,7 +19,10 @@ function useLogout(): UseMutationResult<
       mutationFn: logout,
       onSettled: () => {
         queryClient.setQueryData(["token"], { accessToken: "" });
-        queryClient.setQueriesData(["user"], {});
+        queryClient.setQueryData(["user"], {});
+        queryClient.setQueryDefaults(["token"], {
+          enabled: false,
+        });
       },
     }
   );

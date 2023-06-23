@@ -26,7 +26,9 @@ function useLogin(): UseMutationResult<
     onSuccess: (data) => {
       const tokenData = { accessToken: data.accessToken };
       queryClient.setQueryData(["token"], tokenData);
-      console.log("Data: ", data);
+      queryClient.setQueryDefaults(["token"], {
+        enabled: true,
+      });
     },
   });
 }

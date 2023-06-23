@@ -5,7 +5,7 @@ import loginSchema from "../Validation/Login";
 import FormField from "../Components/Form/FormField";
 import useLogin from "../Hooks/useLogin";
 import { mutationErrorHandler } from "../utils/ErrorHandler";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginView() {
   const values: LoginRequest = {
@@ -61,7 +61,7 @@ function LoginView() {
               </button>
               <div className="dropdown-divider"></div>
               <p className="mt-3 text-center">
-                Do not have an account? <a href="/signup">Signup</a>
+                Do not have an account? <Link to="/signup">Signup</Link>
               </p>
             </form>
           )}

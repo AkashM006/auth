@@ -5,7 +5,7 @@ import FormField from "../Components/Form/FormField";
 import useSignup from "../Hooks/useSignup";
 import signupSchema from "../Validation/Signup";
 import { mutationErrorHandler } from "../utils/ErrorHandler";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SignupView() {
   const values: SignUpRequest = {
@@ -67,7 +67,7 @@ function SignupView() {
               </button>
               <div className="dropdown-divider"></div>
               <p className="mt-3 text-center">
-                Already have an account? <a href="/login">Login</a>
+                Already have an account? <Link to="/login">Login</Link>
               </p>
             </form>
           )}

@@ -11,6 +11,17 @@ const errorHandler = (
   // log using logger
   // todo: log using logger, when user is logged in also log the user details
 
+  if (err.status === 401) {
+    const cookies = req.cookies;
+    if (cookies.jwt) {
+      res.clearCookie("jwt", {
+        sameSite: "none",
+        httpOnly: true,
+        secure: true,
+      });
+    }
+  }
+
   const message = `${req.method} ${req.url} ${req.headers.origin} ${
     err.status
   } ${err.description ?? err}`;

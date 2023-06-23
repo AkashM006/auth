@@ -10,10 +10,10 @@ export interface DecodedToken extends jwt.JwtPayload {
 }
 
 const signAccessToken = (user: TokenUser) =>
-  signToken(user, process.env.ACCESS_TOKEN_SECRET as string, "15m");
+  signToken(user, process.env.ACCESS_TOKEN_SECRET as string, "30m"); // 30m
 
 const signRefreshToken = (user: TokenUser) =>
-  signToken(user, process.env.REFRESH_TOKEN_SECRET as string, "1d");
+  signToken(user, process.env.REFRESH_TOKEN_SECRET as string, "7d");
 
 const signToken = (user: TokenUser, secret: string, expiresIn: string) => {
   const token = jwt.sign(
@@ -27,21 +27,12 @@ const signToken = (user: TokenUser, secret: string, expiresIn: string) => {
   return token;
 };
 
-type VerficationCallback = (
-  error: jwt.VerifyErrors | null,
-  decoded: string | jwt.JwtPayload | undefined
-) => void;
-
-const verifyToken = (
-  token: string,
-  type: "refresh" | "access",
-  callback: VerficationCallback
-) => {
+const verifyToken = (token: string, type: "refresh" | "access") => {
   const secret =
     type === "refresh"
       ? (process.env.REFRESH_TOKEN_SECRET as string)
       : (process.env.ACCESS_TOKEN_SECRET as string);
-  jwt.verify(token, secret, callback);
+  return jwt.verify(token, secret);
 };
 
 export { signAccessToken, signRefreshToken, verifyToken };
