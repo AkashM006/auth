@@ -26,6 +26,9 @@ function useSignup(): UseMutationResult<
     onSuccess: (data) => {
       const tokenData = { accessToken: data.accessToken };
       queryClient.setQueryData(["token"], tokenData);
+      queryClient.setQueryDefaults(["token"], {
+        enabled: true,
+      });
     },
   });
 }
