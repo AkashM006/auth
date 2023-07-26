@@ -9,6 +9,7 @@ function useSecret(): UseQueryResult<string, ApiErrorResponse> {
   return useQuery<string, ApiErrorResponse>(["secret"], {
     queryFn: () => getSecret(data?.accessToken ?? ""),
     keepPreviousData: true,
+    enabled: false,
   });
 }
 

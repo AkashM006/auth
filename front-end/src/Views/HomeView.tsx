@@ -8,7 +8,7 @@ import toastConfig from "../utils/ToastConfig";
 function HomeView() {
   const { data } = useUserDetail();
 
-  const { data: secret } = useSecret();
+  const { data: secret, refetch } = useSecret();
 
   const { mutate } = useLogout();
 
@@ -33,6 +33,14 @@ function HomeView() {
           <h1 className="text-center">Welcome back {data?.name}!</h1>
           <div className="dropdown-divider"></div>
           <p className="text-center">Your secret message is: {secret}</p>
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-primary btn-block mx-auto"
+              onClick={() => refetch()}
+            >
+              Get Secret
+            </button>
+          </div>
         </div>
       </div>
     </div>
